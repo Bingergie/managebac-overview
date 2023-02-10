@@ -19,7 +19,7 @@ struct ManagebacData {
     private(set) var deadlines: [Deadline]
 }
 
-class ManagebacDataLoader: NSObject {
+class ManagebacDataLoader: NSObject, WKNavigationDelegate {
     static let shared = ManagebacDataLoader()
 
     private override init() {
@@ -66,40 +66,70 @@ class ManagebacDataLoader: NSObject {
 
             requestPage(url: url) { data, response, error in
                 print("parsing page \(page)...")
-                if let error = error {
-                    // todo: handle the error
-                    print("error: \(error)")
+
+                parseTasks(data: data, response: response, error: error){ (shouldContinue) in
+                    if shouldContinue {
+                        fetchUpcoming(page: page + 1)
+                        return
+                    }
+
+                    print("parsed upcoming tasks: \(page) pages")
+                    completion(managebacData)
                 }
-
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    // todo: handle the error
-                    print("bro, there's not even a response")
-                    return
-                }
-
-                if !(200...299).contains(httpResponse.statusCode) {
-                    print(httpResponse.statusCode)
-                }
-
-                guard let data = data, let htmlString = String(data: data, encoding: .utf8) else {
-                    // todo: handle the error
-                    print("Could not get data or create string from data.")
-                    return
-                }
-
-                // todo: Parse the response data and update managebacData
-
-                if htmlString.contains("show-more-link") {
-                    fetchUpcoming(page: page + 1)
-                    return
-                }
-
-                print("parsed upcoming tasks: \(page) pages")
-                completion(managebacData)
             }
         }
 
+        func fetchCompleted(page: Int = 1) {
+            print("-----------fetch completed-----------")
+
+            let url = URL(string: "https://\(url)/student/tasks_and_deadlines?completed_page=\(page)")!
+            print("fetching page \(page)... url = \(url)")
+
+            requestPage(url: url) { data, response, error in
+                print("parsing page \(page)...")
+
+                parseTasks(data: data, response: response, error: error){ (shouldContinue) in
+                    if shouldContinue {
+                        fetchCompleted(page: page + 1)
+                        return
+                    }
+
+                    print("parsed completed tasks: \(page) pages")
+                    completion(managebacData)
+                }
+            }
+        }
+
+        func parseTasks(data: Data?, response: URLResponse?, error: Error?, _ completion: @escaping (_ shouldContinue: Bool) -> Void) {
+            if let error = error {
+                // todo: handle the error
+                print("error: \(error)")
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                // todo: handle the error
+                print("bro, there's not even a response")
+                return
+            }
+
+            if !(200...299).contains(httpResponse.statusCode) {
+                print(httpResponse.statusCode)
+            }
+
+            guard let data = data, let htmlString = String(data: data, encoding: .utf8) else {
+                // todo: handle the error
+                print("Could not get data or create string from data.")
+                return
+            }
+
+            // todo: Parse the response data and update managebacData
+            completion(htmlString.contains("show-more-link"))
+
+        }
+
+        // only use one, if you use both, it breaks (maybe)
         fetchUpcoming()
+        //fetchCompleted()
     }
 
     private func checkLoginStatus(completion: @escaping (Bool) -> Void) {
@@ -136,20 +166,20 @@ class ManagebacDataLoader: NSObject {
     }
 
     private func requestPage(url: URL, completion: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
-        let websiteDataStore = WKWebsiteDataStore.default()
-        websiteDataStore.httpCookieStore.getAllCookies { (cookies) in
-            let cookieHeaders = cookies.map({ "\($0.name)=\($0.value)" }).joined(separator: "; ")
-            var request = URLRequest(url: url)
-            request.addValue(cookieHeaders, forHTTPHeaderField: "Cookie")
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                completion(data, response, error)
+        DispatchQueue.main.async {
+            let websiteDataStore = WKWebsiteDataStore.default()
+            websiteDataStore.httpCookieStore.getAllCookies { (cookies) in
+                let cookieHeaders = cookies.map({ "\($0.name)=\($0.value)" }).joined(separator: "; ")
+                var request = URLRequest(url: url)
+                request.addValue(cookieHeaders, forHTTPHeaderField: "Cookie")
+                let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                    completion(data, response, error)
+                }
+                task.resume()
             }
-            task.resume()
         }
     }
-}
 
-extension ManagebacDataLoader: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("webview has finished loading")
         checkLoginStatus { (isLoggedIn) in

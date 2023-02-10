@@ -29,7 +29,9 @@ class ManagebacViewModel: ObservableObject {
                 return
             }
             print("updated data: \(data)")
-            self?.managebacData = data
+            DispatchQueue.main.async {
+                self?.managebacData = data
+            }
         }
     }
 }
