@@ -21,7 +21,7 @@ class NetworkManager: NSObject {
     public func fetchManagebacData(completion: ((_ data: ManagebacData?, _ error: Error?) -> Void)?) {
         print("-------------fetch mb data--------------")
         print("fetching data...")
-        fetchData { (data, error) in
+        fetchTasks(type: .upcoming) { data, error in
             completion?(data, error)
         }
     }
@@ -68,82 +68,69 @@ class NetworkManager: NSObject {
         completion()
     }
 
-    private func fetchData(completion: @escaping (_ data: ManagebacData?, _ error: Error?) -> Void) {
-        print("-------------fetch data--------------")
+    private enum TaskType {
+        case upcoming
+        case completed
+    }
+
+    private func fetchTasks(type: TaskType, from page: Int = 1, to limit: Int? = nil, completion: @escaping (ManagebacData?, Error?) -> Void) {
+        print("-----------fetch tasks of type: \(type) -----------")
         var managebacData = ManagebacData(studentName: "", deadlines: [])
 
-        func fetchUpcoming(page: Int = 1) {
-            print("-----------fetch upcoming-----------")
-
-            let url = URL(string: "https://\(url)/student/tasks_and_deadlines?upcoming_page=\(page)")!
+        func fetchPage(type: TaskType, from page: Int = 1, to limit: Int? = nil) {
+            let url: URL
+            switch type {
+            case .upcoming:
+                url = URL(string: "https://\(self.url)/student/tasks_and_deadlines?upcoming_page=\(page)")!
+            case .completed:
+                url = URL(string: "https://\(self.url)/student/tasks_and_deadlines?completed_page=\(page)")!
+            }
             print("fetching page \(page)... url = \(url)")
 
             requestPage(url: url) { data, response, error in
                 print("parsing page \(page)...")
 
-                parseTasks(data: data, response: response, error: error) { (shouldContinue) in
-                    if shouldContinue {
-                        fetchUpcoming(page: page + 1)
-                        return
-                    }
-
-                    print("parsed upcoming tasks: \(page) pages")
-                    completion(managebacData, nil)
+                // handle errors and set variables
+                if let error = error {
+                    // todo: handle the error
+                    print("error: \(error)")
                 }
-            }
-        }
 
-        func fetchCompleted(page: Int = 1) {
-            print("-----------fetch completed-----------")
-
-            let url = URL(string: "https://\(url)/student/tasks_and_deadlines?completed_page=\(page)")!
-            print("fetching page \(page)... url = \(url)")
-
-            requestPage(url: url) { data, response, error in
-                print("parsing page \(page)...")
-
-                parseTasks(data: data, response: response, error: error) { (shouldContinue) in
-                    if shouldContinue {
-                        fetchCompleted(page: page + 1)
-                        return
-                    }
-
-                    print("parsed completed tasks: \(page) pages")
-                    completion(managebacData, nil)
+                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                    // todo: handle the error
+                    print("bad response")
+                    return
                 }
+
+                guard let data = data, let htmlString = String(data: data, encoding: .utf8) else {
+                    // todo: handle the error
+                    print("Could not get data or create string from data.")
+                    return
+                }
+
+                // scrape the html to get tasks
+                managebacData = managebacData + self.parseTasks(data: data)
+
+                // loop stuff
+                let shouldContinue = htmlString.contains("show-more-link")
+                if (limit == nil || (limit != nil && page < limit!)) && shouldContinue {
+                    fetchPage(type: type, from: page + 1, to: limit)
+                    return
+                }
+
+                // end of loop
+                print("parsed \(type) tasks: \(page) pages")
+                completion(managebacData, nil)
             }
         }
 
-        func parseTasks(data: Data?, response: URLResponse?, error: Error?, _ completion: @escaping (_ shouldContinue: Bool) -> Void) {
-            if let error = error {
-                // todo: handle the error
-                print("error: \(error)")
-            }
+        fetchPage(type: type, from: page, to: limit)
+    }
 
-            guard let httpResponse = response as? HTTPURLResponse else {
-                // todo: handle the error
-                print("bro, there's not even a response")
-                return
-            }
+    private func parseTasks(data: Data) -> ManagebacData {
 
-            if !(200...299).contains(httpResponse.statusCode) {
-                print(httpResponse.statusCode)
-            }
-
-            guard let data = data, let htmlString = String(data: data, encoding: .utf8) else {
-                // todo: handle the error
-                print("Could not get data or create string from data.")
-                return
-            }
-
-            // todo: Parse the response data and update managebacData
-            completion(htmlString.contains("show-more-link"))
-
-        }
-
-        // only use one, if you use both, it breaks (maybe)
-        fetchUpcoming()
-        //fetchCompleted()
+        // todo: Parse the response data and update managebacData
+        ManagebacData(studentName: "", deadlines: [])
     }
 
     private func grabCookies(completion: @escaping (_ cookieHeaders: String) -> Void) {

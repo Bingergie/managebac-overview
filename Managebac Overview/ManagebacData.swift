@@ -15,6 +15,14 @@ struct Deadline {
 }
 
 struct ManagebacData {
-    private(set) var studentName: String
-    private(set) var deadlines: [Deadline]
+    var studentName: String
+    var deadlines: [Deadline]
+
+    static func +(lhs: ManagebacData, rhs: ManagebacData) -> ManagebacData {
+        if lhs.studentName != rhs.studentName {
+            print("bro the two student names aren't the same")
+            // todo: handle this error
+        }
+        return ManagebacData(studentName: lhs.studentName, deadlines: lhs.deadlines + rhs.deadlines)
+    }
 }
