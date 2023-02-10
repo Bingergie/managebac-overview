@@ -13,33 +13,20 @@ class NetworkManager: NSObject {
     }
 
     private let webView = WKWebView()
-    private var tempCompletion: ((_ data: ManagebacData?) -> Void)?
-    //private let url: URL
 
     private let url = "ibwya.managebac.cn"
     private let email = "#@wya.top"
     private let password = "no"
 
-    public func fetchManagebacData(completion: ((ManagebacData?) -> Void)?) {
+    public func fetchManagebacData(completion: ((_ data: ManagebacData?, _ error: Error?) -> Void)?) {
         print("-------------fetch mb data--------------")
         print("fetching data...")
-        print("checking login status...")
-        checkLoginStatus { (isLoggedIn) in
-            print("-------------fetch mb data--------------")
-            print("login status = \(isLoggedIn)")
-            if !isLoggedIn {
-                print("loading login...")
-                self.tempCompletion = completion
-                self.loadLogin()
-                return
-            }
-            self.fetchData { (data) in
-                completion?(data)
-            }
+        fetchData { (data, error) in
+            completion?(data, error)
         }
     }
 
-    public func checkLoginStatus(completion: @escaping (Bool) -> Void) {
+    public func checkLoginStatus(completion: @escaping (_ isLoggedIn: Bool) -> Void) {
         print("----------check login status-----------")
         print("fetching login status...")
         requestPage(url: URL(string: "https://\(url)/student")!) { data, response, error in
@@ -64,7 +51,24 @@ class NetworkManager: NSObject {
         }
     }
 
-    private func fetchData(completion: @escaping (ManagebacData) -> Void) {
+    // TODO!! important! this function should only be used for testing purposes
+    public func login(completion: @escaping () -> Void) {
+        DispatchQueue.main.async {
+            self.webView.load(URLRequest(url: URL(string: "https://\(self.url)/login")!))
+        }
+
+        completion()
+    }
+
+    public func login(url: String, email: String, password: String, completion: @escaping () -> Void) {
+        DispatchQueue.main.async {
+            self.webView.load(URLRequest(url: URL(string: "https://\(url)/login")!))
+        }
+
+        completion()
+    }
+
+    private func fetchData(completion: @escaping (_ data: ManagebacData?, _ error: Error?) -> Void) {
         print("-------------fetch data--------------")
         var managebacData = ManagebacData(studentName: "", deadlines: [])
 
@@ -84,7 +88,7 @@ class NetworkManager: NSObject {
                     }
 
                     print("parsed upcoming tasks: \(page) pages")
-                    completion(managebacData)
+                    completion(managebacData, nil)
                 }
             }
         }
@@ -105,7 +109,7 @@ class NetworkManager: NSObject {
                     }
 
                     print("parsed completed tasks: \(page) pages")
-                    completion(managebacData)
+                    completion(managebacData, nil)
                 }
             }
         }
@@ -169,28 +173,13 @@ class NetworkManager: NSObject {
 extension NetworkManager: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("webview has finished loading")
-        checkLoginStatus { (isLoggedIn) in
-            print("isLoggedIn = \(isLoggedIn)")
-            if isLoggedIn {
-                print("is already logged in")
-                self.fetchManagebacData(completion: self.tempCompletion ?? nil)
-                return
-            }
-            self.fillLogin()
+        if let url = webView.url, url.absoluteString.contains("login") {
+            fillLogin()
         }
     }
 
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        print("loading...")
-        print("url: \(webView.url?.absoluteString ?? "no url")")
-    }
-
-    private func loadLogin() {
-        DispatchQueue.global().async {
-            DispatchQueue.main.async {
-                self.webView.load(URLRequest(url: URL(string: "https://ibwya.managebac.cn/login")!))
-            }
-        }
+        print("loading page: \(webView.url?.absoluteString ?? "no url")")
     }
 
     private func fillLogin() {
