@@ -22,7 +22,7 @@ class ManagebacViewModel: ObservableObject {
     }
 
     func refreshData() {
-        ManagebacDataLoader.shared.fetchManagebacData { [weak self] (data: ManagebacData?) in
+        NetworkManager.shared.fetchManagebacData { [weak self] (data: ManagebacData?) in
             print("-----------refresh data-----------")
             guard let data = data else {
                 print("no data")
