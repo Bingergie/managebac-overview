@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E2443A8AEBD22B8BBEBB4A8 /* ManagebacData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E244C55F33CE9AB8E88A167 /* ManagebacData.swift */; };
+		37DF1C6B29320D930031830A /* ManagebacAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1C6A29320D930031830A /* ManagebacAPI.swift */; };
 		37FA0270291BFD9500A25791 /* Managebac_OverviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FA026F291BFD9500A25791 /* Managebac_OverviewApp.swift */; };
 		37FA0272291BFD9500A25791 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FA0271291BFD9500A25791 /* ContentView.swift */; };
 		37FA0274291BFD9500A25791 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FA0273291BFD9500A25791 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2E244C55F33CE9AB8E88A167 /* ManagebacData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagebacData.swift; sourceTree = "<group>"; };
+		37DF1C6A29320D930031830A /* ManagebacAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagebacAPI.swift; sourceTree = "<group>"; };
 		37FA026C291BFD9500A25791 /* Managebac Overview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Managebac Overview.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FA026F291BFD9500A25791 /* Managebac_OverviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managebac_OverviewApp.swift; sourceTree = "<group>"; };
 		37FA0271291BFD9500A25791 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 			children = (
 				37FA026F291BFD9500A25791 /* Managebac_OverviewApp.swift */,
 				37FA0271291BFD9500A25791 /* ContentView.swift */,
+				37DF1C6A29320D930031830A /* ManagebacAPI.swift */,
+				2E244C55F33CE9AB8E88A167 /* ManagebacData.swift */,
 				37FA0273291BFD9500A25791 /* Assets.xcassets */,
 				37FA0278291BFD9500A25791 /* Managebac_Overview.entitlements */,
 				37FA0275291BFD9500A25791 /* Preview Content */,
@@ -145,6 +151,8 @@
 			dependencies = (
 			);
 			name = "Managebac Overview";
+			packageProductDependencies = (
+			);
 			productName = "Managebac Overview";
 			productReference = 37FA026C291BFD9500A25791 /* Managebac Overview.app */;
 			productType = "com.apple.product-type.application";
@@ -193,7 +201,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					37FA026B291BFD9500A25791 = {
 						CreatedOnToolsVersion = 14.1;
@@ -217,6 +225,8 @@
 				Base,
 			);
 			mainGroup = 37FA0263291BFD9500A25791;
+			packageReferences = (
+			);
 			productRefGroup = 37FA026D291BFD9500A25791 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -260,7 +270,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FA0272291BFD9500A25791 /* ContentView.swift in Sources */,
+				37DF1C6B29320D930031830A /* ManagebacAPI.swift in Sources */,
 				37FA0270291BFD9500A25791 /* Managebac_OverviewApp.swift in Sources */,
+				2E2443A8AEBD22B8BBEBB4A8 /* ManagebacData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +342,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -390,6 +403,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -416,9 +430,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Managebac Overview/Managebac_Overview.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Managebac Overview/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -441,9 +457,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Managebac Overview/Managebac_Overview.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Managebac Overview/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -467,6 +485,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
@@ -485,6 +504,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
@@ -502,6 +522,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.hebing.Managebac-OverviewUITests";
@@ -518,6 +539,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.hebing.Managebac-OverviewUITests";

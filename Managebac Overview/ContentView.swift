@@ -6,21 +6,34 @@
 //
 
 import SwiftUI
+import WebKit
 
 struct ContentView: View {
+    @ObservedObject var viewModel: ManagebacViewModel
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        HStack {
+            RoundedRectangle(cornerRadius: 10, style: .continuous).onTapGesture { viewModel.refreshData() }
         }
-        .padding()
+    }
+}
+
+struct CardView: View {
+    var title: String
+    let shape = RoundedRectangle(cornerRadius: 10, style: .continuous)
+    var body: some View {
+        ZStack {
+            shape.fill().foregroundColor(.white)
+            shape.stroke().foregroundColor(.accentColor)
+            Text(title)
+            
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let data = ManagebacViewModel()
+        ContentView(viewModel: data)
     }
 }

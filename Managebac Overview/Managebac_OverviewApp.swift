@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct Managebac_OverviewApp: App {
+    let api = ManagebacViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: api)
         }
     }
 }
