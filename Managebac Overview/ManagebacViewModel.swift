@@ -10,15 +10,9 @@ import Foundation
 class ManagebacViewModel: ObservableObject {
 
     @Published private var managebacData: ManagebacData
-    var studentName: String {
-        managebacData.studentName
-    }
-    var deadlines: [Deadline] {
-        managebacData.deadlines
-    }
 
     init() {
-        managebacData = ManagebacData(studentName: "", deadlines: [])
+        managebacData = ManagebacData(studentName: "", tasks: [], events: [])
     }
 
     func refreshData() {

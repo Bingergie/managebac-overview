@@ -7,7 +7,22 @@
 
 import Foundation
 
-struct Deadline {
+enum TaskType {
+    case formative
+    case summative
+}
+
+struct Task: Identifiable {
+    let id: String
+    let dueDate: Date
+    let title: String
+    //let type: TaskType
+    let course: String
+    let description: String
+}
+
+struct Event: Identifiable {
+    let id: String
     let dueDate: Date
     let title: String
     let course: String
@@ -16,13 +31,30 @@ struct Deadline {
 
 struct ManagebacData {
     var studentName: String
-    var deadlines: [Deadline]
+    var tasks: [Task]
+    var events: [Event]
 
     static func +(lhs: ManagebacData, rhs: ManagebacData) -> ManagebacData {
         if lhs.studentName != rhs.studentName {
-            print("bro the two student names aren't the same")
+            print("bro the two student names aren't the same, overriding")
             // todo: handle this error
         }
-        return ManagebacData(studentName: lhs.studentName, deadlines: lhs.deadlines + rhs.deadlines)
+        return ManagebacData(studentName: rhs.studentName, tasks: lhs.tasks + rhs.tasks, events: lhs.events + rhs.events)
+    }
+
+    static func +(lhs: ManagebacData, rhs: Task) -> ManagebacData {
+        ManagebacData(studentName: lhs.studentName, tasks: lhs.tasks + [rhs], events: lhs.events)
+    }
+
+    static func +(lhs: ManagebacData, rhs: [Task]) -> ManagebacData {
+        ManagebacData(studentName: lhs.studentName, tasks: lhs.tasks + rhs, events: lhs.events)
+    }
+
+    static func +(lhs: ManagebacData, rhs: Event) -> ManagebacData {
+        ManagebacData(studentName: lhs.studentName, tasks: lhs.tasks, events: lhs.events + [rhs])
+    }
+
+    static func +(lhs: ManagebacData, rhs: [Event]) -> ManagebacData {
+        ManagebacData(studentName: lhs.studentName, tasks: lhs.tasks, events: lhs.events + rhs)
     }
 }

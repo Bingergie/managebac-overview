@@ -3,6 +3,7 @@
 //
 
 import WebKit
+import SwiftSoup
 
 class NetworkManager: NSObject {
     static let shared = NetworkManager()
@@ -75,7 +76,7 @@ class NetworkManager: NSObject {
 
     private func fetchTasks(type: TaskType, from page: Int = 1, to limit: Int? = nil, completion: @escaping (ManagebacData?, Error?) -> Void) {
         print("-----------fetch tasks of type: \(type) -----------")
-        var managebacData = ManagebacData(studentName: "", deadlines: [])
+        var managebacData = ManagebacData(studentName: "", tasks: [], events: [])
 
         func fetchPage(type: TaskType, from page: Int = 1, to limit: Int? = nil) {
             let url: URL
@@ -109,7 +110,45 @@ class NetworkManager: NSObject {
                 }
 
                 // scrape the html to get tasks
-                managebacData = managebacData + self.parseTasks(data: data)
+                print("scraping tasks")
+                var studentName = ""
+                var tasksArray: [Task] = []
+                var eventsArray: [Event] = []
+                // todo: Parse the response data and update managebacData
+                do {
+                    let doc: Document = try SwiftSoup.parse(htmlString)
+                    let results: Element = try doc.select(".upcoming-tasks").first()!
+
+                    studentName = try String(doc.select("title").text().split(separator: "| ")[1])
+
+                    let tasks: Elements = try results.select(".line.task-node.anchor.js-presentation")
+                    let deadlines: Elements = try results.select(".line")
+
+                    for task in tasks {
+                        let day: String = try task.select(".day").text()
+                        let month: String = try task.select(".month").text()
+                        let dateString: String = try task.select(".due.regular").text()
+                        let components = dateString.components(separatedBy: " at ")
+                        let dayOfWeek = components[0]
+                        let time = components[1]
+                        let title: String = try task.select("h4.title a").text()
+                        print(title)
+                        let link: String = try task.select("a[href]").attr("href")
+                        let id: String = String(link.split(separator: "core_tasks/")[1])
+
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "d MM y"
+                        let dueDate = formatter.date(from: "\(day) \(month) \(Calendar.current.component(.year, from: .now))")
+                        print(formatter.string(from: dueDate!))
+
+                        let newTask = Task(id: id, dueDate: dueDate!, title: title, course: "", description: "")
+                        tasksArray.append(newTask)
+                    }
+
+                } catch {
+                    print(error)
+                }
+                managebacData = managebacData + ManagebacData(studentName: studentName, tasks: tasksArray, events: eventsArray)
 
                 // loop stuff
                 let shouldContinue = htmlString.contains("show-more-link")
@@ -125,12 +164,6 @@ class NetworkManager: NSObject {
         }
 
         fetchPage(type: type, from: page, to: limit)
-    }
-
-    private func parseTasks(data: Data) -> ManagebacData {
-
-        // todo: Parse the response data and update managebacData
-        ManagebacData(studentName: "", deadlines: [])
     }
 
     private func grabCookies(completion: @escaping (_ cookieHeaders: String) -> Void) {
