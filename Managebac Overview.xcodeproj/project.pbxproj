@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E2441DCFA650B36A5BE9083 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E244DBABB9E59115683EFB1 /* NetworkManager.swift */; };
 		2E2443A8AEBD22B8BBEBB4A8 /* ManagebacData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E244C55F33CE9AB8E88A167 /* ManagebacData.swift */; };
 		37AEF5B52996487600B006E4 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 37AEF5B42996487600B006E4 /* SwiftSoup */; };
-		37DF1C6B29320D930031830A /* ManagebacAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1C6A29320D930031830A /* ManagebacAPI.swift */; };
+		37DF1C6B29320D930031830A /* ManagebacViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1C6A29320D930031830A /* ManagebacViewModel.swift */; };
 		37FA0270291BFD9500A25791 /* Managebac_OverviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FA026F291BFD9500A25791 /* Managebac_OverviewApp.swift */; };
 		37FA0272291BFD9500A25791 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FA0271291BFD9500A25791 /* ContentView.swift */; };
 		37FA0274291BFD9500A25791 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FA0273291BFD9500A25791 /* Assets.xcassets */; };
@@ -38,16 +39,14 @@
 
 /* Begin PBXFileReference section */
 		2E244C55F33CE9AB8E88A167 /* ManagebacData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagebacData.swift; sourceTree = "<group>"; };
-		37DF1C6A29320D930031830A /* ManagebacAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagebacAPI.swift; sourceTree = "<group>"; };
-		37FA026C291BFD9500A25791 /* Managebac Overview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Managebac Overview.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E244DBABB9E59115683EFB1 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		37DF1C6A29320D930031830A /* ManagebacViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagebacViewModel.swift; sourceTree = "<group>"; };
 		37FA026F291BFD9500A25791 /* Managebac_OverviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managebac_OverviewApp.swift; sourceTree = "<group>"; };
 		37FA0271291BFD9500A25791 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		37FA0273291BFD9500A25791 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37FA0276291BFD9500A25791 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37FA0278291BFD9500A25791 /* Managebac_Overview.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Managebac_Overview.entitlements; sourceTree = "<group>"; };
-		37FA027D291BFD9500A25791 /* Managebac OverviewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Managebac OverviewTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FA0281291BFD9500A25791 /* Managebac_OverviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managebac_OverviewTests.swift; sourceTree = "<group>"; };
-		37FA0287291BFD9500A25791 /* Managebac OverviewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Managebac OverviewUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FA028B291BFD9500A25791 /* Managebac_OverviewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managebac_OverviewUITests.swift; sourceTree = "<group>"; };
 		37FA028D291BFD9500A25791 /* Managebac_OverviewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managebac_OverviewUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,18 +83,7 @@
 				37FA026E291BFD9500A25791 /* Managebac Overview */,
 				37FA0280291BFD9500A25791 /* Managebac OverviewTests */,
 				37FA028A291BFD9500A25791 /* Managebac OverviewUITests */,
-				37FA026D291BFD9500A25791 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		37FA026D291BFD9500A25791 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				37FA026C291BFD9500A25791 /* Managebac Overview.app */,
-				37FA027D291BFD9500A25791 /* Managebac OverviewTests.xctest */,
-				37FA0287291BFD9500A25791 /* Managebac OverviewUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		37FA026E291BFD9500A25791 /* Managebac Overview */ = {
@@ -103,7 +91,8 @@
 			children = (
 				37FA026F291BFD9500A25791 /* Managebac_OverviewApp.swift */,
 				37FA0271291BFD9500A25791 /* ContentView.swift */,
-				37DF1C6A29320D930031830A /* ManagebacAPI.swift */,
+				37DF1C6A29320D930031830A /* ManagebacViewModel.swift */,
+				2E244DBABB9E59115683EFB1 /* NetworkManager.swift */,
 				2E244C55F33CE9AB8E88A167 /* ManagebacData.swift */,
 				37FA0273291BFD9500A25791 /* Assets.xcassets */,
 				37FA0278291BFD9500A25791 /* Managebac_Overview.entitlements */,
@@ -157,7 +146,6 @@
 				37AEF5B42996487600B006E4 /* SwiftSoup */,
 			);
 			productName = "Managebac Overview";
-			productReference = 37FA026C291BFD9500A25791 /* Managebac Overview.app */;
 			productType = "com.apple.product-type.application";
 		};
 		37FA027C291BFD9500A25791 /* Managebac OverviewTests */ = {
@@ -175,7 +163,6 @@
 			);
 			name = "Managebac OverviewTests";
 			productName = "Managebac OverviewTests";
-			productReference = 37FA027D291BFD9500A25791 /* Managebac OverviewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		37FA0286291BFD9500A25791 /* Managebac OverviewUITests */ = {
@@ -193,7 +180,6 @@
 			);
 			name = "Managebac OverviewUITests";
 			productName = "Managebac OverviewUITests";
-			productReference = 37FA0287291BFD9500A25791 /* Managebac OverviewUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -231,7 +217,6 @@
 			packageReferences = (
 				37AEF5B32996487600B006E4 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
-			productRefGroup = 37FA026D291BFD9500A25791 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -274,9 +259,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FA0272291BFD9500A25791 /* ContentView.swift in Sources */,
-				37DF1C6B29320D930031830A /* ManagebacAPI.swift in Sources */,
+				37DF1C6B29320D930031830A /* ManagebacViewModel.swift in Sources */,
 				37FA0270291BFD9500A25791 /* Managebac_OverviewApp.swift in Sources */,
 				2E2443A8AEBD22B8BBEBB4A8 /* ManagebacData.swift in Sources */,
+				2E2441DCFA650B36A5BE9083 /* NetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
