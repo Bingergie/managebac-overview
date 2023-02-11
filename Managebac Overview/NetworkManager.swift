@@ -69,16 +69,16 @@ class NetworkManager: NSObject {
         completion()
     }
 
-    private enum TaskType {
+    private enum TaskTypeByDate {
         case upcoming
         case completed
     }
 
-    private func fetchTasks(type: TaskType, from page: Int = 1, to limit: Int? = nil, completion: @escaping (ManagebacData?, Error?) -> Void) {
+    private func fetchTasks(type: TaskTypeByDate, from page: Int = 1, to limit: Int? = nil, completion: @escaping (ManagebacData?, Error?) -> Void) {
         print("-----------fetch tasks of type: \(type) -----------")
         var managebacData = ManagebacData(studentName: "", tasks: [], events: [])
 
-        func fetchPage(type: TaskType, from page: Int = 1, to limit: Int? = nil) {
+        func fetchPage(type: TaskTypeByDate, from page: Int = 1, to limit: Int? = nil) {
             let url: URL
             switch type {
             case .upcoming:
@@ -132,7 +132,10 @@ class NetworkManager: NSObject {
                         let dayOfWeek = components[0]
                         let time = components[1]
                         let title: String = try task.select("h4.title a").text()
+                        let labels: String = try task.select(".label").text()
+                        let type: String = labels.components(separatedBy: " ")[0]
                         print(title)
+                        print(type)
                         let link: String = try task.select("a[href]").attr("href")
                         let id: String = String(link.split(separator: "core_tasks/")[1])
 
@@ -141,7 +144,7 @@ class NetworkManager: NSObject {
                         let dueDate = formatter.date(from: "\(day) \(month) \(Calendar.current.component(.year, from: .now))")
                         print(formatter.string(from: dueDate!))
 
-                        let newTask = Task(id: id, dueDate: dueDate!, title: title, course: "", description: "")
+                        let newTask = Task(id: id, dueDate: dueDate!, title: title, type: TaskType(rawValue: type)!, course: "", description: "")
                         tasksArray.append(newTask)
                     }
 

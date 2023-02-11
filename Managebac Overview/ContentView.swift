@@ -14,6 +14,21 @@ struct ContentView: View {
     var body: some View {
         HStack {
             RoundedRectangle(cornerRadius: 10, style: .continuous).onTapGesture { viewModel.refreshData() }
+            VStack {
+                let data = viewModel.data
+                Text(data.studentName).padding()
+                ScrollView {
+                    ForEach(data.tasks) { task in
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20, style: .continuous).foregroundColor(.accentColor)
+                            VStack {
+                                Text(task.title).font(.headline)
+                                Text(task.type.rawValue).font(.caption)
+                            }.padding()
+                        }
+                    }
+                }
+            }
         }
     }
 }

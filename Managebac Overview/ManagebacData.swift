@@ -7,16 +7,16 @@
 
 import Foundation
 
-enum TaskType {
-    case formative
-    case summative
+enum TaskType: String {
+    case formative = "Formative"
+    case summative = "Summative"
 }
 
 struct Task: Identifiable {
     let id: String
     let dueDate: Date
     let title: String
-    //let type: TaskType
+    let type: TaskType
     let course: String
     let description: String
 }

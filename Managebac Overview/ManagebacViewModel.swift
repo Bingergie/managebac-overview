@@ -9,10 +9,10 @@ import Foundation
 
 class ManagebacViewModel: ObservableObject {
 
-    @Published private var managebacData: ManagebacData
+    @Published private(set) var data: ManagebacData
 
     init() {
-        managebacData = ManagebacData(studentName: "", tasks: [], events: [])
+        data = ManagebacData(studentName: "", tasks: [], events: [])
     }
 
     func refreshData() {
@@ -39,7 +39,7 @@ class ManagebacViewModel: ObservableObject {
 
                 print("updated data: \(data)")
                 DispatchQueue.main.async {
-                    self.managebacData = data
+                    self.data = data
                 }
             }
         }
