@@ -13,8 +13,9 @@ class NetworkManager: NSObject {
         webView.navigationDelegate = self
     }
 
-    private let webView = WKWebView()
+    public let webView = WKWebView()
 
+    private var tempCompletion: (() -> Void)?
     private let url = "ibwya.managebac.cn"
     private let email = "#@wya.top"
     private let password = "no"
@@ -58,7 +59,7 @@ class NetworkManager: NSObject {
             self.webView.load(URLRequest(url: URL(string: "https://\(self.url)/login")!))
         }
 
-        completion()
+        tempCompletion = completion
     }
 
     public func login(url: String, email: String, password: String, completion: @escaping () -> Void) {
@@ -66,7 +67,7 @@ class NetworkManager: NSObject {
             self.webView.load(URLRequest(url: URL(string: "https://\(url)/login")!))
         }
 
-        completion()
+        tempCompletion = completion
     }
 
     private enum TaskTypeByDate {
@@ -97,7 +98,7 @@ class NetworkManager: NSObject {
                     print("error: \(error)")
                 }
 
-                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                guard let httpResponse = response as? HTTPURLResponse/*, (200...299).contains(httpResponse.statusCode)*/ else {
                     // todo: handle the error
                     print("bad response")
                     return
@@ -196,8 +197,12 @@ class NetworkManager: NSObject {
 extension NetworkManager: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("webview has finished loading")
+
         if let url = webView.url, url.absoluteString.contains("login") {
             fillLogin()
+        } else if tempCompletion != nil {
+            tempCompletion!()
+            tempCompletion = nil
         }
     }
 
