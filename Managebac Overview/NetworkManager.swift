@@ -98,7 +98,7 @@ class NetworkManager: NSObject {
                     print("error: \(error)")
                 }
 
-                guard let httpResponse = response as? HTTPURLResponse/*, (200...299).contains(httpResponse.statusCode)*/ else {
+                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
                     // todo: handle the error
                     print("bad response")
                     return
@@ -208,6 +208,10 @@ extension NetworkManager: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         print("loading page: \(webView.url?.absoluteString ?? "no url")")
+        if let url = webView.url, !url.absoluteString.contains("login"), tempCompletion != nil {
+            tempCompletion!()
+            tempCompletion = nil
+        }
     }
 
     private func fillLogin() {
