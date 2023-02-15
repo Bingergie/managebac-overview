@@ -16,9 +16,9 @@ class NetworkManager: NSObject {
     public let webView = WKWebView()
 
     private var tempCompletion: (() -> Void)?
-    private let url = "ibwya.managebac.cn"
-    private let email = "#@wya.top"
-    private let password = "no"
+    private var url = "ibwya.managebac.cn"
+    private var email = "#@wya.top"
+    private var password = "no"
 
     public func fetchManagebacData(completion: ((_ data: ManagebacData?, _ error: Error?) -> Void)?) {
         print("-------------fetch mb data--------------")
@@ -41,7 +41,9 @@ class NetworkManager: NSObject {
         DispatchQueue.main.async {
             self.webView.load(URLRequest(url: URL(string: "https://\(url)/login")!))
         }
-
+        self.url = url
+        self.email = email
+        self.password = password
         tempCompletion = completion
     }
 

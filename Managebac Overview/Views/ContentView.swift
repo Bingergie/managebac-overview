@@ -41,7 +41,8 @@ struct TaskView: View {
                 }
                 Text("\(formatter.string(from: task.dueDate)), \(task.dueTime)").font(.body).italic().minimumScaleFactor(0.5)
                 Text(task.course).font(.body).italic().minimumScaleFactor(0.5)
-            }.padding()
+            }
+                    .padding()
         }
     }
 }
@@ -50,12 +51,50 @@ struct TaskListView: View {
     var title: String
     var tasks: [Task]
     var body: some View {
-        VStack(spacing:20) {
+        VStack(spacing: 20) {
             Text(title)
             ForEach(tasks) { task in
                 TaskView(task: task)
             }
-        }.fixedSize(horizontal: false, vertical: true)
+        }
+                .fixedSize(horizontal: false, vertical: true)
+    }
+}
+
+// loginView
+struct LoginView: View {
+    var viewModel: ManagebacViewModel
+    @State private var email = ""
+    @State private var password = ""
+
+    var body: some View {
+        VStack {
+            TextField("Email", text: $email)
+                    .padding()
+                    .disableAutocorrection(true)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            SecureField("Password", text: $password)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            Button(action: {
+                viewModel.login(email: email, password: password) { success in
+                    if success {
+                        viewModel.refreshData()
+                    }
+                }
+            }) {
+                Text("Log in")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 220, height: 60)
+                        .background(Color.blue)
+                        .cornerRadius(15.0)
+            }
+        }
+                .padding()
     }
 }
 
@@ -64,8 +103,14 @@ struct ContentView: View {
 
     var body: some View {
         HStack {
-            RoundedRectangle(cornerRadius: 10, style: .continuous).onTapGesture { viewModel.refreshData() }
-            WebBrowserView()
+            RoundedRectangle(cornerRadius: 10, style: .continuous).onTapGesture {
+                viewModel.refreshData()
+            }
+            if viewModel.isLoggedIn {
+                WebBrowserView()
+            } else {
+                LoginView(viewModel: viewModel)
+            }
 
         }
         OverviewView(data: viewModel.data)

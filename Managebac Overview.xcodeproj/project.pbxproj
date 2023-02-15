@@ -12,6 +12,7 @@
 		2E244740710A58A1EA19F4BA /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2442CE663E191904054359 /* Color.swift */; };
 		2E2449C3EE7AAC02B2CD3E5C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E24426358B8F6886870F522 /* Font.swift */; };
 		2E244B473CB2D510C67E21B8 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E244B359941C81C0F36D790 /* Calendar.swift */; };
+		2E244FB5C1CA3A648F317D98 /* OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E24477D9885DA7218FDE26E /* OverviewView.swift */; };
 		37AEF5B52996487600B006E4 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 37AEF5B42996487600B006E4 /* SwiftSoup */; };
 		37DF1C6B29320D930031830A /* ManagebacViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1C6A29320D930031830A /* ManagebacViewModel.swift */; };
 		37FA0270291BFD9500A25791 /* Managebac_OverviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FA026F291BFD9500A25791 /* Managebac_OverviewApp.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		2E24426358B8F6886870F522 /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		2E2442CE663E191904054359 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		2E24477D9885DA7218FDE26E /* OverviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewView.swift; sourceTree = "<group>"; };
 		2E244B359941C81C0F36D790 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		2E244C55F33CE9AB8E88A167 /* ManagebacData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagebacData.swift; sourceTree = "<group>"; };
 		2E244DBABB9E59115683EFB1 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				2E2442CE663E191904054359 /* Color.swift */,
 				2E24426358B8F6886870F522 /* Font.swift */,
 				2E244B359941C81C0F36D790 /* Calendar.swift */,
+				2E24477D9885DA7218FDE26E /* OverviewView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				2E244740710A58A1EA19F4BA /* Color.swift in Sources */,
 				2E2449C3EE7AAC02B2CD3E5C /* Font.swift in Sources */,
 				2E244B473CB2D510C67E21B8 /* Calendar.swift in Sources */,
+				2E244FB5C1CA3A648F317D98 /* OverviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,9 +21,10 @@ class ManagebacViewModel: ObservableObject {
         }
     }
 
-    func login(url: String, email: String, password: String, completion: @escaping () -> Void) {
+    func login(url: String = "ibwya.managebac.cn", email: String, password: String, completion: @escaping (_ success: Bool) -> Void) {
         if isLoggedIn {
             print("is already logged in!")
+            completion(true)
             return
         }
         NetworkManager.shared.login(url: url, email: email, password: password) {
@@ -35,8 +36,10 @@ class ManagebacViewModel: ObservableObject {
                     // todo: handle error
                 }
                 self.isLoggedIn = isLoggedIn
+                completion(isLoggedIn)
             }
         }
+
     }
 
     func refreshData() {
