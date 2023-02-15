@@ -59,32 +59,6 @@ struct TaskListView: View {
     }
 }
 
-struct OverviewView: View {
-    var data: ManagebacData
-    var body: some View {
-        ScrollView {
-            VStack {
-                Text(data.studentName).padding()
-                ZStack {
-                    RoundedRectangle(cornerRadius: 20, style: .continuous).foregroundColor(.white).opacity(0.9)
-                    HStack(alignment: .top) {
-                        Spacer()
-                        TaskListView(title: "All Upcoming Summative", tasks: data.tasks.filter { $0.type == .summative }).padding()
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                        Spacer()
-                        TaskListView(title: "Today & Tomorrow", tasks: data.tasks.filter {Calendar.current.isDateInToday($0.dueDate) || Calendar.current.isDateInTomorrow($0.dueDate)}).padding()
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                        Spacer()
-                        TaskListView(title: "In 2 Weeks", tasks: data.tasks.filter {Calendar.current.isDateInThisWeek($0.dueDate) || Calendar.current.isDateInNextWeek($0.dueDate)}).padding()
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                        Spacer()
-                    }.padding()
-                }.padding()
-            }
-        }.background(Color.accentColor)
-    }
-}
-
 struct ContentView: View {
     @ObservedObject var viewModel: ManagebacViewModel
 
