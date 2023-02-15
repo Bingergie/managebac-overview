@@ -28,6 +28,23 @@ class NetworkManager: NSObject {
         }
     }
 
+    // TODO!! important! this function should only be used for testing purposes
+    public func login(completion: @escaping () -> Void) {
+        DispatchQueue.main.async {
+            self.webView.load(URLRequest(url: URL(string: "https://\(self.url)/login")!))
+        }
+
+        tempCompletion = completion
+    }
+
+    public func login(url: String, email: String, password: String, completion: @escaping () -> Void) {
+        DispatchQueue.main.async {
+            self.webView.load(URLRequest(url: URL(string: "https://\(url)/login")!))
+        }
+
+        tempCompletion = completion
+    }
+
     public func checkLoginStatus(completion: @escaping (_ isLoggedIn: Bool) -> Void) {
         print("----------check login status-----------")
         print("fetching login status...")
@@ -51,23 +68,6 @@ class NetworkManager: NSObject {
                 return
             }
         }
-    }
-
-    // TODO!! important! this function should only be used for testing purposes
-    public func login(completion: @escaping () -> Void) {
-        DispatchQueue.main.async {
-            self.webView.load(URLRequest(url: URL(string: "https://\(self.url)/login")!))
-        }
-
-        tempCompletion = completion
-    }
-
-    public func login(url: String, email: String, password: String, completion: @escaping () -> Void) {
-        DispatchQueue.main.async {
-            self.webView.load(URLRequest(url: URL(string: "https://\(url)/login")!))
-        }
-
-        tempCompletion = completion
     }
 
     private enum TaskTypeByDate {
