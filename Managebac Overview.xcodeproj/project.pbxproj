@@ -10,7 +10,6 @@
 		2E2441DCFA650B36A5BE9083 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E244DBABB9E59115683EFB1 /* NetworkManager.swift */; };
 		2E2443A8AEBD22B8BBEBB4A8 /* ManagebacData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E244C55F33CE9AB8E88A167 /* ManagebacData.swift */; };
 		2E244740710A58A1EA19F4BA /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2442CE663E191904054359 /* Color.swift */; };
-		2E2449C3EE7AAC02B2CD3E5C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E24426358B8F6886870F522 /* Font.swift */; };
 		2E244B473CB2D510C67E21B8 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E244B359941C81C0F36D790 /* Calendar.swift */; };
 		2E244FB5C1CA3A648F317D98 /* OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E24477D9885DA7218FDE26E /* OverviewView.swift */; };
 		37AEF5B52996487600B006E4 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 37AEF5B42996487600B006E4 /* SwiftSoup */; };
@@ -42,7 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2E24426358B8F6886870F522 /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		2E2442CE663E191904054359 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		2E24477D9885DA7218FDE26E /* OverviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewView.swift; sourceTree = "<group>"; };
 		2E244B359941C81C0F36D790 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 			children = (
 				37FA0271291BFD9500A25791 /* ContentView.swift */,
 				2E2442CE663E191904054359 /* Color.swift */,
-				2E24426358B8F6886870F522 /* Font.swift */,
 				2E244B359941C81C0F36D790 /* Calendar.swift */,
 				2E24477D9885DA7218FDE26E /* OverviewView.swift */,
 			);
@@ -284,7 +281,6 @@
 				2E2443A8AEBD22B8BBEBB4A8 /* ManagebacData.swift in Sources */,
 				2E2441DCFA650B36A5BE9083 /* NetworkManager.swift in Sources */,
 				2E244740710A58A1EA19F4BA /* Color.swift in Sources */,
-				2E2449C3EE7AAC02B2CD3E5C /* Font.swift in Sources */,
 				2E244B473CB2D510C67E21B8 /* Calendar.swift in Sources */,
 				2E244FB5C1CA3A648F317D98 /* OverviewView.swift in Sources */,
 			);
