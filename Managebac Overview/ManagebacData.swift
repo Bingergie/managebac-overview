@@ -15,6 +15,7 @@ enum TaskType: String {
 struct Task: Identifiable {
     let id: String
     let dueDate: Date
+    let dueTime: String
     let title: String
     let type: TaskType
     let course: String

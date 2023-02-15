@@ -125,18 +125,21 @@ class NetworkManager: NSObject {
                     let tasks: Elements = try results.select(".line.task-node.anchor.js-presentation")
                     let deadlines: Elements = try results.select(".line")
 
-                    for task in tasks {
+                    for i in (0...tasks.size()-1) {
+                        let task = tasks[i]
                         let day: String = try task.select(".day").text()
                         let month: String = try task.select(".month").text()
-                        let dateString: String = try task.select(".due.regular").text()
-                        let components = dateString.components(separatedBy: " at ")
+                        let timeString: String = try task.select(".due.regular").text()
+                        let components = timeString.components(separatedBy: " at ")
                         let dayOfWeek = components[0]
                         let time = components[1]
                         let title: String = try task.select("h4.title a").text()
+                        let course: String = try doc.select("div.group-name a").get(i).text()
                         let labels: String = try task.select(".label").text()
                         let type: String = labels.components(separatedBy: " ")[0]
                         print(title)
                         print(type)
+                        print(course)
                         let link: String = try task.select("a[href]").attr("href")
                         let id: String = String(link.split(separator: "core_tasks/")[1])
 
@@ -145,7 +148,7 @@ class NetworkManager: NSObject {
                         let dueDate = formatter.date(from: "\(day) \(month) \(Calendar.current.component(.year, from: .now))")
                         print(formatter.string(from: dueDate!))
 
-                        let newTask = Task(id: id, dueDate: dueDate!, title: title, type: TaskType(rawValue: type)!, course: "", description: "")
+                        let newTask = Task(id: id, dueDate: dueDate!, dueTime: timeString, title: title, type: TaskType(rawValue: type)!, course: course, description: "")
                         tasksArray.append(newTask)
                     }
 
