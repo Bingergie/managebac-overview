@@ -16,8 +16,16 @@ class ManagebacViewModel: ObservableObject {
     init() {
         data = ManagebacData(studentName: "", tasks: [], events: [])
         isLoggedIn = false
-        NetworkManager.shared.checkLoginStatus { isLoggedIn in
-            self.isLoggedIn = isLoggedIn
+        NetworkManager.shared.login {
+            NetworkManager.shared.checkLoginStatus { isLoggedIn in
+                self.isLoggedIn = isLoggedIn
+                if isLoggedIn {
+                    print("logged in!")
+                    self.refreshData()
+                } else {
+                    print("not logged in!")
+                }
+            }
         }
     }
 

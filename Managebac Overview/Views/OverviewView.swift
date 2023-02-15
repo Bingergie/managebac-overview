@@ -5,6 +5,7 @@
 import SwiftUI
 
 struct OverviewView: View {
+    var viewModel: ManagebacViewModel
     var data: ManagebacData
     var body: some View {
         var taskLists: [(String, [Task])] = []
@@ -17,7 +18,17 @@ struct OverviewView: View {
         }))
         return ScrollView {
             VStack {
-                Text(data.studentName).padding()
+                HStack {
+                    Text(data.studentName).padding()
+                    ZStack {
+                        // login button
+                        RoundedRectangle(cornerRadius: 20, style: .continuous).foregroundColor(.white).opacity(0.9)
+                                .onTapGesture {
+                                    viewModel.refreshData()
+                                }
+                        Image(systemName: "arrow.clockwise").foregroundColor(.black)
+                    }
+                }
                 ZStack {
                     RoundedRectangle(cornerRadius: 20, style: .continuous).foregroundColor(.white).opacity(0.9)
                     HStack(alignment: .top) {

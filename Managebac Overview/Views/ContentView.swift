@@ -102,7 +102,7 @@ struct ContentView: View {
     @ObservedObject var viewModel: ManagebacViewModel
 
     var body: some View {
-        HStack {
+        /*HStack {
             RoundedRectangle(cornerRadius: 10, style: .continuous).onTapGesture {
                 viewModel.refreshData()
             }
@@ -112,8 +112,12 @@ struct ContentView: View {
                 LoginView(viewModel: viewModel)
             }
 
+        }*/
+        if viewModel.isLoggedIn {
+            OverviewView(viewModel: viewModel, data: viewModel.data).foregroundColor(.black)
+        } else {
+            LoginView(viewModel: viewModel)
         }
-        OverviewView(data: viewModel.data)
     }
 }
 
