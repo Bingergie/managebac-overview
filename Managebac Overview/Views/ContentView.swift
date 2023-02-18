@@ -34,9 +34,9 @@ struct TaskView: View {
                     .opacity(0.3)
             VStack {
                 HStack {
-                    Text(task.type == .formative ? "f" : "S").font(.body).italic().minimumScaleFactor(0.5)
+                    Text(task.type == .formative ? "f" : "S")
+                            .font(.body.weight(.heavy)).italic().minimumScaleFactor(0.5)
                             .foregroundColor(task.type == .formative ? Color(hex: 0x11BE0D) : .blue)
-                            .fontWeight(.heavy)
                     Text(task.title).font(.body).bold().minimumScaleFactor(0.5)
                 }
                 Text("\(formatter.string(from: task.dueDate)), \(task.dueTime)").font(.body).italic().minimumScaleFactor(0.5)
@@ -64,11 +64,19 @@ struct TaskListView: View {
 // loginView
 struct LoginView: View {
     var viewModel: ManagebacViewModel
+    @State private var url = ""
     @State private var email = ""
     @State private var password = ""
+    @State private var loginFailed = false
 
     var body: some View {
         VStack {
+            HStack {
+                TextField("URL eg. example.managebac.com", text: $url)
+                        .padding()
+                        .disableAutocorrection(true)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+            }
             TextField("Email", text: $email)
                     .padding()
                     .disableAutocorrection(true)
@@ -79,7 +87,10 @@ struct LoginView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
             Button(action: {
-                viewModel.login(email: email, password: password) { success in
+                print("login button pressed")
+                viewModel.login(url: url, email: email, password: password) { success in
+                    print("login success: \(success)")
+                    self.loginFailed = !success
                     if success {
                         viewModel.refreshData()
                     }
@@ -92,9 +103,13 @@ struct LoginView: View {
                         .frame(width: 220, height: 60)
                         .background(Color.blue)
                         .cornerRadius(15.0)
-            }
+            }.alert(isPresented: $loginFailed) {
+                        Alert(title: Text("Login failed"), message: Text("Please check your email and password"), dismissButton: .default(Text("OK")))
+                    }
         }
                 .padding()
+        // hidden failed login alert
+
     }
 }
 
@@ -102,17 +117,7 @@ struct ContentView: View {
     @ObservedObject var viewModel: ManagebacViewModel
 
     var body: some View {
-        /*HStack {
-            RoundedRectangle(cornerRadius: 10, style: .continuous).onTapGesture {
-                viewModel.refreshData()
-            }
-            if viewModel.isLoggedIn {
-                WebBrowserView()
-            } else {
-                LoginView(viewModel: viewModel)
-            }
-
-        }*/
+        WebBrowserView()
         if viewModel.isLoggedIn {
             OverviewView(viewModel: viewModel, data: viewModel.data).foregroundColor(.black)
         } else {

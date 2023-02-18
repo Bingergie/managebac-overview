@@ -29,10 +29,16 @@ class ManagebacViewModel: ObservableObject {
         }
     }
 
-    func login(url: String = "ibwya.managebac.cn", email: String, password: String, completion: @escaping (_ success: Bool) -> Void) {
+    func login(url: String, email: String, password: String, completion: @escaping (_ success: Bool) -> Void) {
         if isLoggedIn {
             print("is already logged in!")
             completion(true)
+            return
+        }
+        // check if url is valid
+        if !url.contains(".managebac.") {
+            print("invalid url!")
+            completion(false)
             return
         }
         NetworkManager.shared.login(url: url, email: email, password: password) {

@@ -146,9 +146,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		37FA026B291BFD9500A25791 /* Managebac Overview */ = {
+		37FA026B291BFD9500A25791 /* Task Vision */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 37FA0291291BFD9500A25791 /* Build configuration list for PBXNativeTarget "Managebac Overview" */;
+			buildConfigurationList = 37FA0291291BFD9500A25791 /* Build configuration list for PBXNativeTarget "Task Vision" */;
 			buildPhases = (
 				37FA0268291BFD9500A25791 /* Sources */,
 				37FA0269291BFD9500A25791 /* Frameworks */,
@@ -158,16 +158,16 @@
 			);
 			dependencies = (
 			);
-			name = "Managebac Overview";
+			name = "Task Vision";
 			packageProductDependencies = (
 				37AEF5B42996487600B006E4 /* SwiftSoup */,
 			);
 			productName = "Managebac Overview";
 			productType = "com.apple.product-type.application";
 		};
-		37FA027C291BFD9500A25791 /* Managebac OverviewTests */ = {
+		37FA027C291BFD9500A25791 /* Task VisionTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 37FA0294291BFD9500A25791 /* Build configuration list for PBXNativeTarget "Managebac OverviewTests" */;
+			buildConfigurationList = 37FA0294291BFD9500A25791 /* Build configuration list for PBXNativeTarget "Task VisionTests" */;
 			buildPhases = (
 				37FA0279291BFD9500A25791 /* Sources */,
 				37FA027A291BFD9500A25791 /* Frameworks */,
@@ -178,13 +178,13 @@
 			dependencies = (
 				37FA027F291BFD9500A25791 /* PBXTargetDependency */,
 			);
-			name = "Managebac OverviewTests";
+			name = "Task VisionTests";
 			productName = "Managebac OverviewTests";
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		37FA0286291BFD9500A25791 /* Managebac OverviewUITests */ = {
+		37FA0286291BFD9500A25791 /* Task VisionUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 37FA0297291BFD9500A25791 /* Build configuration list for PBXNativeTarget "Managebac OverviewUITests" */;
+			buildConfigurationList = 37FA0297291BFD9500A25791 /* Build configuration list for PBXNativeTarget "Task VisionUITests" */;
 			buildPhases = (
 				37FA0283291BFD9500A25791 /* Sources */,
 				37FA0284291BFD9500A25791 /* Frameworks */,
@@ -195,7 +195,7 @@
 			dependencies = (
 				37FA0289291BFD9500A25791 /* PBXTargetDependency */,
 			);
-			name = "Managebac OverviewUITests";
+			name = "Task VisionUITests";
 			productName = "Managebac OverviewUITests";
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -222,7 +222,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 37FA0267291BFD9500A25791 /* Build configuration list for PBXProject "Managebac Overview" */;
+			buildConfigurationList = 37FA0267291BFD9500A25791 /* Build configuration list for PBXProject "Task Vision" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -237,9 +237,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				37FA026B291BFD9500A25791 /* Managebac Overview */,
-				37FA027C291BFD9500A25791 /* Managebac OverviewTests */,
-				37FA0286291BFD9500A25791 /* Managebac OverviewUITests */,
+				37FA026B291BFD9500A25791 /* Task Vision */,
+				37FA027C291BFD9500A25791 /* Task VisionTests */,
+				37FA0286291BFD9500A25791 /* Task VisionUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -308,12 +308,12 @@
 /* Begin PBXTargetDependency section */
 		37FA027F291BFD9500A25791 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 37FA026B291BFD9500A25791 /* Managebac Overview */;
+			target = 37FA026B291BFD9500A25791 /* Task Vision */;
 			targetProxy = 37FA027E291BFD9500A25791 /* PBXContainerItemProxy */;
 		};
 		37FA0289291BFD9500A25791 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 37FA026B291BFD9500A25791 /* Managebac Overview */;
+			target = 37FA026B291BFD9500A25791 /* Task Vision */;
 			targetProxy = 37FA0288291BFD9500A25791 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -370,7 +370,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -425,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -503,7 +503,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Managebac Overview.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Managebac Overview";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Task Vision.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Task Vision";
 			};
 			name = Debug;
 		};
@@ -522,7 +522,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Managebac Overview.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Managebac Overview";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Task Vision.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Task Vision";
 			};
 			name = Release;
 		};
@@ -563,7 +563,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		37FA0267291BFD9500A25791 /* Build configuration list for PBXProject "Managebac Overview" */ = {
+		37FA0267291BFD9500A25791 /* Build configuration list for PBXProject "Task Vision" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37FA028F291BFD9500A25791 /* Debug */,
@@ -572,7 +572,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		37FA0291291BFD9500A25791 /* Build configuration list for PBXNativeTarget "Managebac Overview" */ = {
+		37FA0291291BFD9500A25791 /* Build configuration list for PBXNativeTarget "Task Vision" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37FA0292291BFD9500A25791 /* Debug */,
@@ -581,7 +581,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		37FA0294291BFD9500A25791 /* Build configuration list for PBXNativeTarget "Managebac OverviewTests" */ = {
+		37FA0294291BFD9500A25791 /* Build configuration list for PBXNativeTarget "Task VisionTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37FA0295291BFD9500A25791 /* Debug */,
@@ -590,7 +590,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		37FA0297291BFD9500A25791 /* Build configuration list for PBXNativeTarget "Managebac OverviewUITests" */ = {
+		37FA0297291BFD9500A25791 /* Build configuration list for PBXNativeTarget "Task VisionUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37FA0298291BFD9500A25791 /* Debug */,

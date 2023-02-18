@@ -11,12 +11,22 @@ class NetworkManager: NSObject {
     private override init() {
         super.init()
         webView.navigationDelegate = self
+        // set the url, email, and password from UserDefaults
+        if let url = UserDefaults.standard.string(forKey: "url") {
+            self.url = url
+        }
+        if let email = UserDefaults.standard.string(forKey: "email") {
+            self.email = email
+        }
+        if let password = UserDefaults.standard.string(forKey: "password") {
+            self.password = password
+        }
     }
 
     public let webView = WKWebView()
 
     private var tempCompletion: (() -> Void)?
-    private var url = "ibwya.managebac.cn"
+    private var url = ""
     private var email = "#@wya.top"
     private var password = "no"
 
@@ -28,8 +38,14 @@ class NetworkManager: NSObject {
         }
     }
 
-    // TODO!! important! this function should only be used for testing purposes
     public func login(completion: @escaping () -> Void) {
+        print("logging in...")
+        // check if url is valid
+        if !url.contains(".managebac.") {
+            print("invalid url!")
+            completion()
+            return
+        }
         DispatchQueue.main.async {
             self.webView.load(URLRequest(url: URL(string: "https://\(self.url)/login")!))
         }
@@ -38,6 +54,12 @@ class NetworkManager: NSObject {
     }
 
     public func login(url: String, email: String, password: String, completion: @escaping () -> Void) {
+        // check if url is valid
+        if !url.contains(".managebac.") {
+            print("invalid url!")
+            completion()
+            return
+        }
         DispatchQueue.main.async {
             self.webView.load(URLRequest(url: URL(string: "https://\(url)/login")!))
         }
@@ -45,6 +67,11 @@ class NetworkManager: NSObject {
         self.email = email
         self.password = password
         tempCompletion = completion
+
+        // save the url, email, and password to UserDefaults
+        UserDefaults.standard.set(url, forKey: "url")
+        UserDefaults.standard.set(email, forKey: "email")
+        UserDefaults.standard.set(password, forKey: "password")
     }
 
     public func checkLoginStatus(completion: @escaping (_ isLoggedIn: Bool) -> Void) {
@@ -55,6 +82,7 @@ class NetworkManager: NSObject {
             guard let httpResponse = response as? HTTPURLResponse, error == nil else {
                 // todo: handle the error
                 print("error fetching login status!")
+                completion(false)
                 return
             }
 
@@ -122,7 +150,7 @@ class NetworkManager: NSObject {
                     let doc: Document = try SwiftSoup.parse(htmlString)
                     let results: Element = try doc.select(".upcoming-tasks").first()!
 
-                    studentName = try String(doc.select("title").text().split(separator: "| ")[1])
+                    studentName = try String(doc.select("title").text().components(separatedBy: "| ")[1])
 
                     let tasks: Elements = try results.select(".line.task-node.anchor.js-presentation")
                     let deadlines: Elements = try results.select(".line")
@@ -143,7 +171,8 @@ class NetworkManager: NSObject {
                         print(type)
                         print(course)
                         let link: String = try task.select("a[href]").attr("href")
-                        let id: String = String(link.split(separator: "core_tasks/")[1])
+                        //let id: String = String(link.split(separator: "core_tasks/")[1])
+                        let id: String = link
 
                         let formatter = DateFormatter()
                         formatter.dateFormat = "d MM y"

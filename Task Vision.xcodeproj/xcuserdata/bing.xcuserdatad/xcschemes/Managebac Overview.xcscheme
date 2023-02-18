@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "37FA026B291BFD9500A25791"
-               BuildableName = "Managebac Overview"
-               BlueprintName = "Managebac Overview"
-               ReferencedContainer = "container:Managebac Overview.xcodeproj">
+               BuildableName = "Task Vision"
+               BlueprintName = "Task Vision"
+               ReferencedContainer = "container:Task Vision.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "37FA026B291BFD9500A25791"
-            BuildableName = "Managebac Overview"
-            BlueprintName = "Managebac Overview"
-            ReferencedContainer = "container:Managebac Overview.xcodeproj">
+            BuildableName = "Task Vision"
+            BlueprintName = "Task Vision"
+            ReferencedContainer = "container:Task Vision.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <LocationScenarioReference
