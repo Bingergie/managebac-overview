@@ -72,7 +72,7 @@ struct LoginView: View {
     var body: some View {
         VStack {
             HStack {
-                TextField("URL eg. example.managebac.com", text: $url)
+                TextField("URL eg. example.managebac.cn", text: $url)
                         .padding()
                         .disableAutocorrection(true)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
