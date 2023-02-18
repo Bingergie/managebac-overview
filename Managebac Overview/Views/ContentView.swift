@@ -108,8 +108,6 @@ struct LoginView: View {
                     }
         }
                 .padding()
-        // hidden failed login alert
-
     }
 }
 
@@ -117,7 +115,9 @@ struct ContentView: View {
     @ObservedObject var viewModel: ManagebacViewModel
 
     var body: some View {
+        #if DEBUG
         WebBrowserView()
+        #endif
         if viewModel.isLoggedIn {
             OverviewView(viewModel: viewModel, data: viewModel.data).foregroundColor(.black)
         } else {
