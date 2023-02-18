@@ -176,7 +176,7 @@ class NetworkManager: NSObject {
 
                         let formatter = DateFormatter()
                         formatter.dateFormat = "d MM y"
-                        let dueDate = formatter.date(from: "\(day) \(month) \(Calendar.current.component(.year, from: .now))")
+                        let dueDate = formatter.date(from: "\(day) \(month) \(Calendar.current.dateComponents([.year], from: Date()))")
                         print(formatter.string(from: dueDate!))
 
                         let newTask = Task(id: id, dueDate: dueDate!, dueTime: timeString, title: title, type: TaskType(rawValue: type)!, course: course, description: "")
