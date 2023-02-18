@@ -174,9 +174,10 @@ class NetworkManager: NSObject {
                         //let id: String = String(link.split(separator: "core_tasks/")[1])
                         let id: String = link
 
+                        //get due date
                         let formatter = DateFormatter()
-                        formatter.dateFormat = "d MM y"
-                        let dueDate = formatter.date(from: "\(day) \(month) \(Calendar.current.dateComponents([.year], from: Date()))")
+                        formatter.dateFormat = "d MM yyyy"
+                        let dueDate = formatter.date(from: "\(day) \(month) \(Calendar.current.dateComponents([.year], from: Date()).year!)")
                         print(formatter.string(from: dueDate!))
 
                         let newTask = Task(id: id, dueDate: dueDate!, dueTime: timeString, title: title, type: TaskType(rawValue: type)!, course: course, description: "")
