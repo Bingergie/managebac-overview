@@ -10,7 +10,7 @@ so you will never miss a task again!
 
 <img width="1091" alt="Screenshot 2023-02-22 at 17 54 20 2" src="https://user-images.githubusercontent.com/61782112/220593480-61698b03-e4aa-4d23-8f86-fb9135666dbf.png">
 
-URL: write the url of your school's managebac site (e.g. "school.managebac.cn")
+URL: write the url of your school's managebac site (e.g. "ibwya.managebac.cn")
 
 for email and password, use your managebac email and password
 
