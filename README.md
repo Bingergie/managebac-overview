@@ -24,8 +24,11 @@ App Cannot be Opened
 Solution: 
 
 click "OK"
+
 go to system preferences
+
 go to "security and privacy"
+
 click "open anyway"
 
 <img width="827" alt="Screenshot 2023-02-22 at 17 51 16 copy" src="https://user-images.githubusercontent.com/61782112/220593434-58d6e5df-fb45-429d-84e4-4d8bb000adb8.png">
